@@ -109,8 +109,8 @@ export default function Exam() {
   const handleOptionSelect = (questionId, optionIndex) => {
     const currentSelection = localAnswers[questionId] || [];
     const newSelection = currentSelection.includes(optionIndex)
-      ? currentSelection.filter(idx => idx !== optionIndex)
-      : [...currentSelection, optionIndex];
+      ? []
+      : [optionIndex];
 
     setLocalAnswers(prev => ({ ...prev, [questionId]: newSelection }));
     setSyncStatus('Saving...');
