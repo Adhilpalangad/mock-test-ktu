@@ -38,8 +38,16 @@ export default function Login() {
         </div>
 
         {errorMsg && (
-          <div className="mb-4 p-3.5 bg-red-950/30 border border-red-900/40 rounded-xl text-red-400 text-sm">
-            ⚠️ {errorMsg}
+          <div className="mb-4 p-3.5 bg-red-950/30 border border-red-900/40 rounded-xl text-red-400 text-sm flex flex-col gap-1.5">
+            <span className="flex items-center gap-1.5">
+              <span>⚠️</span>
+              <span>{errorMsg}</span>
+            </span>
+            {errorMsg.toLowerCase().includes('not registered') && (
+              <Link to="/signup" className="text-primary-400 hover:text-primary-300 font-semibold underline ml-5 mt-1 block">
+                Go to Sign Up Page &rarr;
+              </Link>
+            )}
           </div>
         )}
 

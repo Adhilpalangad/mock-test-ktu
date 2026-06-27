@@ -154,7 +154,10 @@ app.post('/api/auth/login', authLimiter, async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) return res.status(400).json({ message: 'Email and password required.' });
     const user = await User.findOne({ email });
-    if (!user || !(await bcrypt.compare(password, user.passwordHash)))
+    if (!user) {
+      return res.status(401).json({ message: 'Email not registered. Please sign up.' });
+    }
+    if (!(await bcrypt.compare(password, user.passwordHash)))
       return res.status(401).json({ message: 'Invalid credentials.' });
     const tokens = mkTokens(user);
     res.json({ ...tokens, user: { id: user._id, name: user.name, email: user.email, college: user.college, role: user.role } });
