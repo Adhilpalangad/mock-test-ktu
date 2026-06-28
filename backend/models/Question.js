@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const questionSchema = new mongoose.Schema({
   questionText: { type: String, required: true, trim: true },
+  imageUrl: { type: String, trim: true },
   options: {
     type: [{
       text: { type: String, required: true },

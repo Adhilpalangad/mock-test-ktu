@@ -99,6 +99,7 @@ async function sanitiseAttempt(attempt) {
       questionText:        doc.questionText || '',
       category:            doc.category    || '',
       difficulty:          doc.difficulty  || '',
+      imageUrl:            doc.imageUrl    || '',
       options:             (doc.options || []).map(o => ({ text: o.text })) // no isCorrect!
     };
   });
@@ -123,6 +124,7 @@ async function reviewAttempt(attempt) {
       category:            doc.category    || '',
       difficulty:          doc.difficulty  || '',
       explanation:         doc.explanation || '',
+      imageUrl:            doc.imageUrl    || '',
       options:             (doc.options || []).map(o => ({ text: o.text, isCorrect: o.isCorrect }))
     };
   });

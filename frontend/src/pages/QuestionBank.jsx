@@ -118,6 +118,16 @@ export default function QuestionBank() {
 
                   <p className="text-sm md:text-base font-semibold text-slate-200">{q.questionText}</p>
 
+                  {q.imageUrl && (
+                    <div className="mt-2 max-w-full flex bg-dark-800/40 p-4 rounded-xl border border-dark-400/20">
+                      <img
+                        src={q.imageUrl}
+                        alt="Question visual illustration"
+                        className="max-h-48 object-contain rounded-lg shadow-inner"
+                      />
+                    </div>
+                  )}
+
                   {/* Options List */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1">
                     {q.options.map((opt, oIdx) => (

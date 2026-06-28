@@ -290,6 +290,16 @@ export default function Exam() {
                 {currentQuestion.questionText}
               </p>
 
+              {currentQuestion.imageUrl && (
+                <div className="mt-2 max-w-full flex justify-center bg-dark-800/40 p-4 rounded-xl border border-dark-400/20">
+                  <img
+                    src={currentQuestion.imageUrl}
+                    alt="Question visual illustration"
+                    className="max-h-64 object-contain rounded-lg shadow-inner"
+                  />
+                </div>
+              )}
+
               <div className="flex flex-col gap-3.5 mt-2">
                 {currentQuestion.options.map((opt, idx) => {
                   const isSelected = (localAnswers[currentQuestion.questionId] || []).includes(idx);
