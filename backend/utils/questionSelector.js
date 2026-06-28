@@ -37,13 +37,29 @@ export function selectQuestionsForTest(pool, targetMarks = 100, categoryRules = 
   const selected = [];
   const selectedIds = new Set();
 
+  // --- Guarantee at least 3 image/logo based questions ---
+  const imageQs = pool.filter(q => q.imageUrl);
+  const targetImageCount = Math.min(3, imageQs.length);
+  const chosenImageQs = shuffle(imageQs).slice(0, targetImageCount);
+
+  const categoryCounts = {};
+  for (const q of chosenImageQs) {
+    selected.push(q);
+    selectedIds.add(q._id.toString());
+    categoryCounts[q.category] = (categoryCounts[q.category] || 0) + 1;
+  }
+
   for (const cat of categories) {
-    const catQs = pool.filter(q => q.category === cat);
-    const shuffled = shuffle(catQs);
-    const take = shuffled.slice(0, 4);
-    for (const q of take) {
-      selected.push(q);
-      selectedIds.add(q._id.toString());
+    const alreadyTaken = categoryCounts[cat] || 0;
+    const need = 4 - alreadyTaken;
+    if (need > 0) {
+      const catQs = pool.filter(q => q.category === cat && !selectedIds.has(q._id.toString()));
+      const shuffled = shuffle(catQs);
+      const take = shuffled.slice(0, need);
+      for (const q of take) {
+        selected.push(q);
+        selectedIds.add(q._id.toString());
+      }
     }
   }
 
