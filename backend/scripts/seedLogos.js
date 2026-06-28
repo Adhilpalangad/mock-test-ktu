@@ -15,7 +15,7 @@ const logoQuestions = [
     category: "Artificial Intelligence & Machine Learning",
     difficulty: "basic",
     explanation: "This is the logo of Python, an interpreted high-level programming language.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/230px-Python-logo-notext.svg.png",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Python-logo-notext.svg/250px-Python-logo-notext.svg.png",
     isActive: true
   },
   {
@@ -30,7 +30,7 @@ const logoQuestions = [
     category: "Artificial Intelligence & Machine Learning",
     difficulty: "intermediate",
     explanation: "This is the logo of MATLAB (matrix laboratory), a proprietary multi-paradigm programming language and numerical computing environment.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Matlab_Logo.png/240px-Matlab_Logo.png",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Matlab_Logo.png/250px-Matlab_Logo.png",
     isActive: true
   },
   {
@@ -45,7 +45,7 @@ const logoQuestions = [
     category: "Generative AI",
     difficulty: "basic",
     explanation: "This is the logo of Google Gemini, a family of multimodal AI models.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/240px-Google_Gemini_logo.svg.png",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/250px-Google_Gemini_logo.svg.png",
     isActive: true
   },
   {
@@ -60,7 +60,7 @@ const logoQuestions = [
     category: "Generative AI",
     difficulty: "basic",
     explanation: "This is the official logo of OpenAI's ChatGPT chatbot.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/240px-ChatGPT_logo.svg.png",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/250px-ChatGPT_logo.svg.png",
     isActive: true
   },
   {
@@ -75,7 +75,7 @@ const logoQuestions = [
     category: "Generative AI",
     difficulty: "intermediate",
     explanation: "This is the logo of Midjourney, a generative artificial intelligence program and service.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Midjourney_Emblem.svg/240px-Midjourney_Emblem.svg.png",
+    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Midjourney_Emblem.svg/250px-Midjourney_Emblem.svg.png",
     isActive: true
   },
   {
@@ -83,14 +83,14 @@ const logoQuestions = [
     options: [
       { text: "Docker", isCorrect: true },
       { text: "Kubernetes", isCorrect: false },
-      { text: "Podman", isCorrect: false },
+      { "text": "Podman", "isCorrect": false },
       { text: "LXC", isCorrect: false }
     ],
     marks: 2,
     category: "Cloud Computing",
     difficulty: "basic",
     explanation: "This is the logo of Docker, which packages software into standardized units called containers.",
-    imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Docker_%28container_engine%29_logo.svg/240px-Docker_%28container_engine%29_logo.svg.png",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Docker_%28container_engine%29_logo.svg/250px-Docker_%28container_engine%29_logo.svg.png",
     isActive: true
   }
 ];
@@ -108,7 +108,9 @@ async function run() {
       insertedCount++;
       console.log(`Created: ${q.questionText.substring(0, 40)}...`);
     } else {
-      console.log(`Skipped (already exists): ${q.questionText.substring(0, 40)}...`);
+      exists.imageUrl = q.imageUrl;
+      await exists.save();
+      console.log(`Updated (already exists): ${q.questionText.substring(0, 40)}...`);
     }
   }
 
